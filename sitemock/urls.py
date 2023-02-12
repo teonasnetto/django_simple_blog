@@ -19,8 +19,8 @@ from django.conf.urls import handler404, handler500
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('sitemock.core.urls', namespace='core'), name='core'),
-    path('blog/', include('sitemock.blog.urls', namespace='blog'), name='blog'),
+    path('', include('sitemock.core.urls', namespace='core')),
+    path('blog/', include('sitemock.blog.urls', namespace='blog')),
 ]
 
 handler404 = 'sitemock.core.views.error_404_view'

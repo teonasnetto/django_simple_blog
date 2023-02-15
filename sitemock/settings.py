@@ -139,3 +139,9 @@ EMAIL_HOST_USER = 'email@exemplo.com'
 EMAIL_HOST_PASSWORD = 'senha'
 EMAIL_PORT = 587
 CONTACT_EMAIL = 'servidor@exemplo.com'
+
+# Auth
+LOGIN_URL = 'core:login'
+LOGIN_REDIRECT_URL = 'core:home'
+LOGOUT_REDIRECT_URL = 'core:login'
+LOGOUT_URL = 'core:logout'

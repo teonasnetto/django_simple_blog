@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 
 # Create your views here.
-# @login_required(login_url='/admin')
+@login_required
 def home(request):
     return render(request, 'core/home.html', {})
 
@@ -47,6 +47,7 @@ def logout_request(request):
 	messages.info(request, "You have successfully logged out.")
 	return redirect("core:home")
 
+@login_required
 def contact(request):
     if request.method == 'POST':
         form = Contact(request.POST)

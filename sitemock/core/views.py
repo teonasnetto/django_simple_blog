@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .forms import NewUserForm
+from .forms import NewUserForm, Contact
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
@@ -44,6 +44,16 @@ def logout_request(request):
 	logout(request)
 	messages.info(request, "You have successfully logged out.")
 	return redirect("core:home")
+
+def contact(request):
+    if request.method == 'POST':
+        form = Contact(request.POST)
+        if form.is_valid():
+            form.send_mail()
+            form = Contact()
+    else:
+        form = Contact()
+    return render(request, 'core/contact.html', {'contact_form': form})
 
 def error_404_view(request, exception):
 

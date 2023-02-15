@@ -46,7 +46,7 @@
 
                     {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'blog:post_new' %}">new post <span class="glyphicon glyphicon-plus"></span></a>
+                            <a class="nav-link" href="{% url 'blog:post_new' %}">new post<span class="glyphicon glyphicon-plus"></span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'core:logout' %}">Logout</a>
@@ -63,6 +63,9 @@
 
                     {% endif %}
 
+                    <li class="nav-item">
+                            <a class="nav-link" href="{% url 'core:contact' %}">Contato<span class="glyphicon glyphicon-plus"></span></a>
+                    </li>
 
                     </ul>
 

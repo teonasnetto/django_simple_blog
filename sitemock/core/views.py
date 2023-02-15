@@ -19,7 +19,8 @@ def register_request(request):
 			messages.success(request, "Registration successful." )
 			return redirect("core:home")
 		messages.error(request, "Unsuccessful registration. Invalid information.")
-	form = NewUserForm()
+	else:
+		form = NewUserForm()
 	return render (request=request, template_name="core/register.html", context={"register_form":form})
 
 def login_request(request):
@@ -37,7 +38,8 @@ def login_request(request):
 				messages.error(request,"Invalid username or password.")
 		else:
 			messages.error(request,"Invalid username or password.")
-	form = AuthenticationForm()
+	else:
+		form = AuthenticationForm()
 	return render(request=request, template_name="core/login.html", context={"login_form":form})
 
 def logout_request(request):

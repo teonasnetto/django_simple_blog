@@ -12,6 +12,9 @@
             class="glyphicon glyphicon-pencil"></span></a>
     {% endif %}
     <h2>{{ post.title }}</h2>
-    <p>{{ post.text|linebreaksbr }}</p>
+    <p>{{ post.text|linebreaksbr|urlize }}</p>
+    {% if link %}
+        <iframe src={{link}}></iframe>
+    {% endif %}
 </div>
 {% endblock %}

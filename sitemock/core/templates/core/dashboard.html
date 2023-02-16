@@ -1,0 +1,34 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<div class="container col">
+
+    <div class="sm-col-6">
+        <ul class="breadcrumb">
+            {% block breadcrumb %}
+            <li><a href="{% url 'core:dashboard' %}">Meu Painel</a></li>
+            {% endblock %}
+        </ul>
+    </div>
+
+  <div class="container row">
+    <div class="col-4">
+            <ul>
+                <li class="pure-menu-heading">Minha Conta</li>
+                <li><a href="{% url 'core:edit_user' %}">Editar Conta</a></li>
+                <li><a href="{% url 'core:edit_passwd' %}">Editar Senha</a></li>
+            </ul>
+    </div>
+    <div class="col-8 justify-content-center">
+
+        {% block dashboard_content %}
+            <p><strong>Usuário</strong>: {{ user }}</p>
+            <p><strong>E-mail</strong>: {{ user.email }}</p>
+        {% endblock %}
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

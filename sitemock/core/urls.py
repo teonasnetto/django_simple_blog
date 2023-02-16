@@ -9,6 +9,9 @@ urlpatterns = [
     path("login/", views.login_request, name="login"),
     path("logout/", views.logout_request, name= "logout"),
     path("contact/", views.contact, name="contact"),
+    path("user/dashboard/", views.dashboard, name="dashboard"),
+    path("user/edit/", views.edit_user, name="edit_user"),
+    path("user/editar-senha/", views.edit_passwd, name="edit_passwd"),
 ]
 
 handler404 = 'sitemock.core.views.error_404_view'

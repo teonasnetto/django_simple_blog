@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .forms import NewUserForm, Contact
+from .forms import NewUserForm, Contact, EditAccountForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 
 # Create your views here.
 @login_required
@@ -46,6 +46,39 @@ def logout_request(request):
 	logout(request)
 	messages.info(request, "You have successfully logged out.")
 	return redirect("core:home")
+
+@login_required
+def dashboard(request):
+	return render(request, 'core/dashboard.html', {})
+
+@login_required
+def edit_user(request):
+    template_name = 'core/edit.html'
+    context = {}
+    if request.method == 'POST':
+        form = EditAccountForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            form = EditAccountForm(instance=request.user)
+            context['success'] = True
+    else:
+        form = EditAccountForm(instance=request.user)
+    context['form'] = form
+    return render(request, template_name, context)
+
+@login_required
+def edit_passwd(request):
+	template_name = 'core/edit_passwd.html'
+	context = {}
+	if request.method == 'POST':
+		form = PasswordChangeForm(data=request.POST, user=request.user)
+		if form.is_valid():
+			form.save()
+			context['success'] = True
+	else:
+		form = PasswordChangeForm(user=request.user)
+	context['form'] = form
+	return render(request, template_name, context)
 
 @login_required
 def contact(request):

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
+    'rolepermissions',
     'sitemock.core',
     'sitemock.blog',
 ]
@@ -145,3 +146,6 @@ LOGIN_URL = 'core:login'
 LOGIN_REDIRECT_URL = 'core:home'
 LOGOUT_REDIRECT_URL = 'core:login'
 LOGOUT_URL = 'core:logout'
+
+# Permissions
+ROLEPERMISSIONS_MODULE = 'sitemock.core.roles'

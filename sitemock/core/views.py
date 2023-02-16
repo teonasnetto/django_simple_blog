@@ -4,17 +4,21 @@ from .forms import NewUserForm, Contact, EditAccountForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
-
+from rolepermissions.decorators import has_permission_decorator, has_role_decorator
+from rolepermissions.roles import assign_role, remove_role
+from rolepermissions.permissions import revoke_permission, grant_permission
 # Create your views here.
 @login_required
 def home(request):
     return render(request, 'core/home.html', {})
 
+# @has_role_decorator('administrator')
 def register_request(request):
 	if request.method == "POST":
 		form = NewUserForm(request.POST)
 		if form.is_valid():
 			user = form.save()
+			assign_role(user, 'guest')
 			login(request, user)
 			messages.success(request, "Registration successful." )
 			return redirect("core:home")
@@ -47,11 +51,11 @@ def logout_request(request):
 	messages.info(request, "You have successfully logged out.")
 	return redirect("core:home")
 
-@login_required
+@has_role_decorator('administrator')
 def dashboard(request):
 	return render(request, 'core/dashboard.html', {})
 
-@login_required
+@has_role_decorator('administrator')
 def edit_user(request):
     template_name = 'core/edit.html'
     context = {}
@@ -66,7 +70,7 @@ def edit_user(request):
     context['form'] = form
     return render(request, template_name, context)
 
-@login_required
+@has_role_decorator('administrator')
 def edit_passwd(request):
 	template_name = 'core/edit_passwd.html'
 	context = {}

@@ -20,7 +20,7 @@ from rolepermissions.permissions import revoke_permission, grant_permission
 def home(request):
     return render(request, 'core/home.html', {})
 
-# @has_role_decorator('administrator')
+@has_role_decorator('administrator')
 def register_request(request):
 	if request.method == "POST":
 		form = NewUserForm(request.POST)

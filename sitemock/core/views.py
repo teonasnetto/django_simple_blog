@@ -50,6 +50,7 @@ def login_request(request):
 				messages.error(request,"Invalid username or password.")
 		else:
 			messages.error(request,"Invalid username or password.")
+		return redirect("core:login")
 	else:
 		form = AuthenticationForm()
 	return render(request=request, template_name="core/login.html", context={"login_form":form})
